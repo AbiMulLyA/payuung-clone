@@ -13,6 +13,7 @@ class ProfilePersonalInformationPage extends HookWidget {
     final activeStep = useState(0);
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('Profile'),
         backgroundColor: Colors.grey[100],
@@ -26,15 +27,13 @@ class ProfilePersonalInformationPage extends HookWidget {
       ),
       body: Container(
         padding: const EdgeInsets.all(16),
-        color: Colors.white,
-        height: MediaQuery.of(context).size.height,
         child: SingleChildScrollView(
           child: Column(
             children: [
               EasyStepper(
                 activeStep: activeStep.value,
                 lineStyle: const LineStyle(
-                  lineLength: 60,
+                  lineLength: 80,
                   lineType: LineType.normal,
                   defaultLineColor: Colors.amberAccent,
                   finishedLineColor: Colors.orange,
@@ -47,36 +46,97 @@ class ProfilePersonalInformationPage extends HookWidget {
                 unreachedStepTextColor: Colors.amber,
                 showLoadingAnimation: false,
                 showStepBorder: false,
-                steps: const [
+                stepRadius: 15,
+                steps: [
                   EasyStep(
-                    customStep: Text(
+                    customStep: const Text(
                       '1',
                       style: TextStyle(color: Colors.white),
                     ),
-                    title: 'Biodata Diri',
+                    customTitle: _buildMultilineTitle('Informasi Pribadi'),
                   ),
                   EasyStep(
-                    customStep: Text(
+                    customStep: const Text(
                       '2',
                       style: TextStyle(color: Colors.white),
                     ),
-                    title: 'Alamat Pribadi',
+                    customTitle: _buildMultilineTitle('Alamat Pribadi'),
                   ),
                   EasyStep(
-                    customStep: Text(
+                    customStep: const Text(
                       '3',
                       style: TextStyle(color: Colors.white),
                     ),
-                    title: 'Informasi Perusahaan',
+                    customTitle: _buildMultilineTitle('Informasi Perusahaan'),
                   ),
                 ],
                 onStepReached: (index) => activeStep.value = index,
               ),
               if (activeStep.value == 0) ...[
                 const PersonalDataView(),
-              ]
+              ],
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.amber,
+                          backgroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            side: const BorderSide(color: Colors.amber),
+                          ),
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                        ),
+                        child: const Text(
+                          'Sebelumnya',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.amber,
+                          backgroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                        ),
+                        child: const Text(
+                          'Selanjutnya',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMultilineTitle(String title) {
+    return SizedBox(
+      width: 80,
+      child: Text(
+        title,
+        textAlign: TextAlign.center,
+        maxLines: 2,
+        overflow: TextOverflow.visible,
+        style: const TextStyle(
+          fontSize: 12,
+          color: Colors.amber,
+          height: 1.2,
         ),
       ),
     );
