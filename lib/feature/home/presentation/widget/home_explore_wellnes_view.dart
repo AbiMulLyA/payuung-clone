@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../../main.dart';
 
@@ -8,12 +9,14 @@ class HomeExploreWellnesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final vouchers = [
-      VoucherItem(
-          'Indomaret', 'Voucher Digital Indomaret Rp 25.000', 25000, null),
-      VoucherItem('H&M', 'Voucher Digital H&M Rp 100.000', 100000, 3),
-      VoucherItem('EXCELSO', 'Voucher Digital Excelso Rp. 50.000', 50000, 4),
-      VoucherItem(
-          'Bakmi GM', 'Voucher Digital Bakmi GM Rp. 100.000', 100000, 5),
+      VoucherItem('assets/image/voucher_1.svg', 'Indomaret',
+          'Voucher Digital Indomaret Rp 25.000', 25000, null),
+      VoucherItem('assets/image/voucher_2.svg', 'H&M',
+          'Voucher Digital H&M Rp 100.000', 100000, 3),
+      VoucherItem('assets/image/voucher_3.svg', 'EXCELSO',
+          'Voucher Digital Excelso Rp. 50.000', 50000, 4),
+      VoucherItem('assets/image/voucher_4.svg', 'Bakmi GM',
+          'Voucher Digital Bakmi GM Rp. 100.000', 100000, 5),
     ];
 
     return Column(
@@ -56,9 +59,7 @@ class HomeExploreWellnesView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.asset(
-                      'assets/${vouchers[index].brand.toLowerCase()}_logo.png',
-                      height: 50),
+                  SvgPicture.asset(vouchers[index].imagePath, height: 50),
                   const SizedBox(height: 8),
                   Text(vouchers[index].title,
                       style: const TextStyle(fontSize: 14)),
@@ -96,10 +97,12 @@ class HomeExploreWellnesView extends StatelessWidget {
 }
 
 class VoucherItem {
+  final String imagePath;
   final String brand;
   final String title;
   final int price;
   final int? discount;
 
-  VoucherItem(this.brand, this.title, this.price, this.discount);
+  VoucherItem(
+      this.imagePath, this.brand, this.title, this.price, this.discount);
 }

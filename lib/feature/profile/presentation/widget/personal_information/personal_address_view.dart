@@ -4,17 +4,30 @@ import 'package:image_picker/image_picker.dart';
 import 'package:payuung_clone/core/util/image_util.dart';
 
 import '../../../../../core/config/di/injector.dart';
+import '../../../domain/entity/profile.dart';
 import '../../components/form_component.dart';
 
 class PersonalAddressView extends HookWidget {
-  const PersonalAddressView({super.key});
+  const PersonalAddressView({
+    super.key,
+    required this.profile,
+    required this.nikCtr,
+    required this.ktpAddressCtr,
+  });
+
+  final Profile profile;
+  final TextEditingController nikCtr;
+  final TextEditingController ktpAddressCtr;
 
   @override
   Widget build(BuildContext context) {
     final _imageUtil = getIt<ImageUtil>();
 
-    final _nikCtr = useTextEditingController();
-    final _ktpAddressCtr = useTextEditingController();
+    useEffect(() {
+      nikCtr.text = profile.nik.toString();
+      ktpAddressCtr.text = profile.ktpAddress;
+      return () {};
+    }, const []);
 
     return Column(
       children: [
@@ -84,14 +97,14 @@ class PersonalAddressView extends HookWidget {
               const SizedBox(height: 16),
               FormComponent(
                 labelText: 'NIK',
-                formCtr: _nikCtr,
+                formCtr: nikCtr,
                 isRequired: true,
                 isEnabled: true,
               ),
               const SizedBox(height: 16),
               FormComponent(
                 labelText: 'ALAMAT SESUAI KTP',
-                formCtr: _ktpAddressCtr,
+                formCtr: ktpAddressCtr,
                 isRequired: true,
                 isEnabled: true,
               ),

@@ -14,6 +14,7 @@ _$ProfileModelImpl _$$ProfileModelImplFromJson(Map<String, dynamic> json) =>
       sex: json['sex'] as String,
       ktpPath: json['ktpPath'] as String,
       nik: (json['nik'] as num).toInt(),
+      ktpAddress: json['ktpAddress'] as String,
       companyName: json['companyName'] as String,
       companyAddress: json['companyAddress'] as String,
     );
@@ -26,6 +27,7 @@ Map<String, dynamic> _$$ProfileModelImplToJson(_$ProfileModelImpl instance) =>
       'sex': instance.sex,
       'ktpPath': instance.ktpPath,
       'nik': instance.nik,
+      'ktpAddress': instance.ktpAddress,
       'companyName': instance.companyName,
       'companyAddress': instance.companyAddress,
     };

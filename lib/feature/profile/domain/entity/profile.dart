@@ -11,6 +11,7 @@ class Profile with _$Profile {
     required String sex,
     required String ktpPath,
     required int nik,
+    required String ktpAddress,
     required String companyName,
     required String companyAddress,
   }) = _Profile;

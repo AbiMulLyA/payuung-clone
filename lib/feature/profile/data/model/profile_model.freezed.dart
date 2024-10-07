@@ -26,6 +26,7 @@ mixin _$ProfileModel {
   String get sex => throw _privateConstructorUsedError;
   String get ktpPath => throw _privateConstructorUsedError;
   int get nik => throw _privateConstructorUsedError;
+  String get ktpAddress => throw _privateConstructorUsedError;
   String get companyName => throw _privateConstructorUsedError;
   String get companyAddress => throw _privateConstructorUsedError;
 
@@ -52,6 +53,7 @@ abstract class $ProfileModelCopyWith<$Res> {
       String sex,
       String ktpPath,
       int nik,
+      String ktpAddress,
       String companyName,
       String companyAddress});
 }
@@ -77,6 +79,7 @@ class _$ProfileModelCopyWithImpl<$Res, $Val extends ProfileModel>
     Object? sex = null,
     Object? ktpPath = null,
     Object? nik = null,
+    Object? ktpAddress = null,
     Object? companyName = null,
     Object? companyAddress = null,
   }) {
@@ -105,6 +108,10 @@ class _$ProfileModelCopyWithImpl<$Res, $Val extends ProfileModel>
           ? _value.nik
           : nik // ignore: cast_nullable_to_non_nullable
               as int,
+      ktpAddress: null == ktpAddress
+          ? _value.ktpAddress
+          : ktpAddress // ignore: cast_nullable_to_non_nullable
+              as String,
       companyName: null == companyName
           ? _value.companyName
           : companyName // ignore: cast_nullable_to_non_nullable
@@ -132,6 +139,7 @@ abstract class _$$ProfileModelImplCopyWith<$Res>
       String sex,
       String ktpPath,
       int nik,
+      String ktpAddress,
       String companyName,
       String companyAddress});
 }
@@ -155,6 +163,7 @@ class __$$ProfileModelImplCopyWithImpl<$Res>
     Object? sex = null,
     Object? ktpPath = null,
     Object? nik = null,
+    Object? ktpAddress = null,
     Object? companyName = null,
     Object? companyAddress = null,
   }) {
@@ -183,6 +192,10 @@ class __$$ProfileModelImplCopyWithImpl<$Res>
           ? _value.nik
           : nik // ignore: cast_nullable_to_non_nullable
               as int,
+      ktpAddress: null == ktpAddress
+          ? _value.ktpAddress
+          : ktpAddress // ignore: cast_nullable_to_non_nullable
+              as String,
       companyName: null == companyName
           ? _value.companyName
           : companyName // ignore: cast_nullable_to_non_nullable
@@ -205,6 +218,7 @@ class _$ProfileModelImpl implements _ProfileModel {
       required this.sex,
       required this.ktpPath,
       required this.nik,
+      required this.ktpAddress,
       required this.companyName,
       required this.companyAddress});
 
@@ -224,13 +238,15 @@ class _$ProfileModelImpl implements _ProfileModel {
   @override
   final int nik;
   @override
+  final String ktpAddress;
+  @override
   final String companyName;
   @override
   final String companyAddress;
 
   @override
   String toString() {
-    return 'ProfileModel(id: $id, fullName: $fullName, birthDate: $birthDate, sex: $sex, ktpPath: $ktpPath, nik: $nik, companyName: $companyName, companyAddress: $companyAddress)';
+    return 'ProfileModel(id: $id, fullName: $fullName, birthDate: $birthDate, sex: $sex, ktpPath: $ktpPath, nik: $nik, ktpAddress: $ktpAddress, companyName: $companyName, companyAddress: $companyAddress)';
   }
 
   @override
@@ -246,6 +262,8 @@ class _$ProfileModelImpl implements _ProfileModel {
             (identical(other.sex, sex) || other.sex == sex) &&
             (identical(other.ktpPath, ktpPath) || other.ktpPath == ktpPath) &&
             (identical(other.nik, nik) || other.nik == nik) &&
+            (identical(other.ktpAddress, ktpAddress) ||
+                other.ktpAddress == ktpAddress) &&
             (identical(other.companyName, companyName) ||
                 other.companyName == companyName) &&
             (identical(other.companyAddress, companyAddress) ||
@@ -255,7 +273,7 @@ class _$ProfileModelImpl implements _ProfileModel {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, fullName, birthDate, sex,
-      ktpPath, nik, companyName, companyAddress);
+      ktpPath, nik, ktpAddress, companyName, companyAddress);
 
   /// Create a copy of ProfileModel
   /// with the given fields replaced by the non-null parameter values.
@@ -281,6 +299,7 @@ abstract class _ProfileModel implements ProfileModel {
       required final String sex,
       required final String ktpPath,
       required final int nik,
+      required final String ktpAddress,
       required final String companyName,
       required final String companyAddress}) = _$ProfileModelImpl;
 
@@ -299,6 +318,8 @@ abstract class _ProfileModel implements ProfileModel {
   String get ktpPath;
   @override
   int get nik;
+  @override
+  String get ktpAddress;
   @override
   String get companyName;
   @override

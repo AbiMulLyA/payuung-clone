@@ -22,6 +22,7 @@ mixin _$Profile {
   String get sex => throw _privateConstructorUsedError;
   String get ktpPath => throw _privateConstructorUsedError;
   int get nik => throw _privateConstructorUsedError;
+  String get ktpAddress => throw _privateConstructorUsedError;
   String get companyName => throw _privateConstructorUsedError;
   String get companyAddress => throw _privateConstructorUsedError;
 
@@ -43,6 +44,7 @@ abstract class $ProfileCopyWith<$Res> {
       String sex,
       String ktpPath,
       int nik,
+      String ktpAddress,
       String companyName,
       String companyAddress});
 }
@@ -68,6 +70,7 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
     Object? sex = null,
     Object? ktpPath = null,
     Object? nik = null,
+    Object? ktpAddress = null,
     Object? companyName = null,
     Object? companyAddress = null,
   }) {
@@ -96,6 +99,10 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
           ? _value.nik
           : nik // ignore: cast_nullable_to_non_nullable
               as int,
+      ktpAddress: null == ktpAddress
+          ? _value.ktpAddress
+          : ktpAddress // ignore: cast_nullable_to_non_nullable
+              as String,
       companyName: null == companyName
           ? _value.companyName
           : companyName // ignore: cast_nullable_to_non_nullable
@@ -122,6 +129,7 @@ abstract class _$$ProfileImplCopyWith<$Res> implements $ProfileCopyWith<$Res> {
       String sex,
       String ktpPath,
       int nik,
+      String ktpAddress,
       String companyName,
       String companyAddress});
 }
@@ -145,6 +153,7 @@ class __$$ProfileImplCopyWithImpl<$Res>
     Object? sex = null,
     Object? ktpPath = null,
     Object? nik = null,
+    Object? ktpAddress = null,
     Object? companyName = null,
     Object? companyAddress = null,
   }) {
@@ -173,6 +182,10 @@ class __$$ProfileImplCopyWithImpl<$Res>
           ? _value.nik
           : nik // ignore: cast_nullable_to_non_nullable
               as int,
+      ktpAddress: null == ktpAddress
+          ? _value.ktpAddress
+          : ktpAddress // ignore: cast_nullable_to_non_nullable
+              as String,
       companyName: null == companyName
           ? _value.companyName
           : companyName // ignore: cast_nullable_to_non_nullable
@@ -195,6 +208,7 @@ class _$ProfileImpl implements _Profile {
       required this.sex,
       required this.ktpPath,
       required this.nik,
+      required this.ktpAddress,
       required this.companyName,
       required this.companyAddress});
 
@@ -211,13 +225,15 @@ class _$ProfileImpl implements _Profile {
   @override
   final int nik;
   @override
+  final String ktpAddress;
+  @override
   final String companyName;
   @override
   final String companyAddress;
 
   @override
   String toString() {
-    return 'Profile(id: $id, fullName: $fullName, birthDate: $birthDate, sex: $sex, ktpPath: $ktpPath, nik: $nik, companyName: $companyName, companyAddress: $companyAddress)';
+    return 'Profile(id: $id, fullName: $fullName, birthDate: $birthDate, sex: $sex, ktpPath: $ktpPath, nik: $nik, ktpAddress: $ktpAddress, companyName: $companyName, companyAddress: $companyAddress)';
   }
 
   @override
@@ -233,6 +249,8 @@ class _$ProfileImpl implements _Profile {
             (identical(other.sex, sex) || other.sex == sex) &&
             (identical(other.ktpPath, ktpPath) || other.ktpPath == ktpPath) &&
             (identical(other.nik, nik) || other.nik == nik) &&
+            (identical(other.ktpAddress, ktpAddress) ||
+                other.ktpAddress == ktpAddress) &&
             (identical(other.companyName, companyName) ||
                 other.companyName == companyName) &&
             (identical(other.companyAddress, companyAddress) ||
@@ -241,7 +259,7 @@ class _$ProfileImpl implements _Profile {
 
   @override
   int get hashCode => Object.hash(runtimeType, id, fullName, birthDate, sex,
-      ktpPath, nik, companyName, companyAddress);
+      ktpPath, nik, ktpAddress, companyName, companyAddress);
 
   /// Create a copy of Profile
   /// with the given fields replaced by the non-null parameter values.
@@ -260,6 +278,7 @@ abstract class _Profile implements Profile {
       required final String sex,
       required final String ktpPath,
       required final int nik,
+      required final String ktpAddress,
       required final String companyName,
       required final String companyAddress}) = _$ProfileImpl;
 
@@ -275,6 +294,8 @@ abstract class _Profile implements Profile {
   String get ktpPath;
   @override
   int get nik;
+  @override
+  String get ktpAddress;
   @override
   String get companyName;
   @override

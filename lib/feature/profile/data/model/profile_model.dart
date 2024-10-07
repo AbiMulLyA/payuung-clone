@@ -13,6 +13,7 @@ class ProfileModel with _$ProfileModel {
     required String sex,
     required String ktpPath,
     required int nik,
+    required String ktpAddress,
     required String companyName,
     required String companyAddress,
   }) = _ProfileModel;
@@ -27,6 +28,7 @@ class ProfileModel with _$ProfileModel {
         sex: profile.sex,
         ktpPath: profile.ktpPath,
         nik: profile.nik,
+        ktpAddress: profile.ktpAddress,
         companyName: profile.companyName,
         companyAddress: profile.companyAddress,
       );
@@ -40,6 +42,7 @@ extension ProfileModelX on ProfileModel {
         sex: sex,
         ktpPath: ktpPath,
         nik: nik,
+        ktpAddress: ktpAddress,
         companyName: companyName,
         companyAddress: companyAddress,
       );

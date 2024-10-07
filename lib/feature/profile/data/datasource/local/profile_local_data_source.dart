@@ -22,13 +22,14 @@ class ProfileLocalDataSourceImpl implements ProfileLocalDataSource {
       // Return default profile if not exists
       return const ProfileModel(
         id: 1,
-        fullName: 'John Doe',
-        birthDate: '1990-01-01',
+        fullName: 'Ahmad Abi Mulya',
+        birthDate: '2001-09-10',
         sex: 'Male',
-        ktpPath: '/path/to/ktp.jpg',
+        ktpPath: '',
         nik: 1234567890123456,
+        ktpAddress: 'Jalan 123 Jakarta',
         companyName: 'ABC Company',
-        companyAddress: '123 Main St, City',
+        companyAddress: 'Jalan 123 Jakarta',
       );
     }
   }

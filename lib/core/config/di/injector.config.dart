@@ -12,6 +12,7 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:payuung_clone/core/config/di/injector.dart' as _i1037;
 import 'package:payuung_clone/core/config/router/router.dart' as _i202;
+import 'package:payuung_clone/core/util/image_util.dart' as _i551;
 import 'package:payuung_clone/feature/profile/data/datasource/local/profile_local_data_source.dart'
     as _i700;
 import 'package:payuung_clone/feature/profile/data/reposiitory_impl/profile_repository_impl.dart'
@@ -43,6 +44,7 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
     );
     gh.singleton<_i202.AppRouter>(() => registerModule.appRouter);
+    gh.lazySingleton<_i551.ImageUtil>(() => _i551.ImageUtil());
     gh.factory<_i700.ProfileLocalDataSource>(
         () => _i700.ProfileLocalDataSourceImpl(gh<_i779.Database>()));
     gh.factory<_i1000.ProfileRepository>(

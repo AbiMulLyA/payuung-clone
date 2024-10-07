@@ -1,23 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:intl/intl.dart';
+import 'package:payuung_clone/feature/profile/domain/entity/profile.dart';
 
 import '../../components/dropdown_form_component.dart';
 import '../../components/form_component.dart';
 
 class PersonalDataView extends HookWidget {
-  const PersonalDataView({super.key});
+  const PersonalDataView({
+    super.key,
+    required this.profile,
+    required this.nameCtr,
+    required this.birthDayCtr,
+  });
+
+  final Profile profile;
+  final TextEditingController nameCtr;
+  final TextEditingController birthDayCtr;
 
   @override
   Widget build(BuildContext context) {
-    final _nameCtr = useTextEditingController();
-    final _birthDayCtr = useTextEditingController();
+    useEffect(() {
+      nameCtr.text = profile.fullName;
+      birthDayCtr.text = profile.birthDate;
+      return () {};
+    }, const []);
 
     return Column(
       children: [
         FormComponent(
           labelText: 'NAMA LENGKAP',
-          formCtr: _nameCtr,
+          formCtr: nameCtr,
           isRequired: true,
           isEnabled: true,
         ),
@@ -26,7 +39,7 @@ class PersonalDataView extends HookWidget {
         ),
         FormComponent(
           labelText: 'TANGGAL LAHIR',
-          formCtr: _birthDayCtr,
+          formCtr: birthDayCtr,
           isRequired: true,
           isEnabled: false,
           suffixIcon: const Icon(Icons.calendar_month),
@@ -39,7 +52,7 @@ class PersonalDataView extends HookWidget {
             );
 
             if (_showDate != null) {
-              _birthDayCtr.text = DateFormat(
+              birthDayCtr.text = DateFormat(
                 'dd MMMM yyyy',
               ).format(_showDate);
             }
