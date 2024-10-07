@@ -1,6 +1,6 @@
-# myapp
+# Payuung Clone
 
-A new Flutter project.
+A Clone of Payuung Pribadi App.
 
 ## Getting Started
 

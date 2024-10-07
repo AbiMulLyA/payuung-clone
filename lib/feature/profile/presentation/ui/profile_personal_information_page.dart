@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:path/path.dart';
 import 'package:payuung_clone/feature/profile/domain/entity/profile.dart';
 import 'package:payuung_clone/feature/profile/presentation/widget/personal_information/company_information_view.dart';
 import 'package:payuung_clone/feature/profile/presentation/widget/personal_information/personal_address_view.dart';
@@ -18,13 +19,16 @@ class ProfilePersonalInformationPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final activeStep = useState(0);
     final _nameCtr = useTextEditingController();
     final _birthDayCtr = useTextEditingController();
     final _nikCtr = useTextEditingController();
     final _ktpAddressCtr = useTextEditingController();
     final _companyNameCtr = useTextEditingController();
     final _companyAddressCtr = useTextEditingController();
+
+    final activeStep = useState(0);
+    final _ktpFullPath = useState('');
+    final _ktpBaseName = useState('');
 
     return BlocProvider(
       create: (_) => getIt<ProfileCubit>()..loadProfile(),
@@ -44,15 +48,19 @@ class ProfilePersonalInformationPage extends HookWidget {
           ),
           body: BlocListener<ProfileCubit, ProfileState>(
             listener: (context, state) => state.maybeWhen(
-              orElse: () => null,
-              updated: (_) {
-                Fluttertoast.showToast(
-                    msg: 'Update profile berhasil',
-                    backgroundColor: Colors.green);
-                context.read<ProfileCubit>().loadProfile();
-                return null;
-              },
-            ),
+                orElse: () => null,
+                updated: (_) {
+                  Fluttertoast.showToast(
+                      msg: 'Update profile berhasil',
+                      backgroundColor: Colors.green);
+                  context.read<ProfileCubit>().loadProfile();
+                  return null;
+                },
+                loaded: (profile) {
+                  _ktpFullPath.value = profile.ktpPath;
+                  _ktpBaseName.value = basename(profile.ktpPath);
+                  return null;
+                }),
             child: Container(
               padding: const EdgeInsets.all(16),
               child: SingleChildScrollView(
@@ -117,9 +125,12 @@ class ProfilePersonalInformationPage extends HookWidget {
                             ],
                             if (activeStep.value == 1) ...[
                               PersonalAddressView(
-                                  profile: profile,
-                                  nikCtr: _nikCtr,
-                                  ktpAddressCtr: _ktpAddressCtr)
+                                profile: profile,
+                                nikCtr: _nikCtr,
+                                ktpAddressCtr: _ktpAddressCtr,
+                                ktpFullPath: _ktpFullPath,
+                                ktpBaseName: _ktpBaseName,
+                              )
                             ],
                             if (activeStep.value == 2) ...[
                               CompanyInformationView(
@@ -174,7 +185,7 @@ class ProfilePersonalInformationPage extends HookWidget {
                                           fullName: _nameCtr.text,
                                           birthDate: _birthDayCtr.text,
                                           sex: 'MALE',
-                                          ktpPath: '',
+                                          ktpPath: _ktpFullPath.value,
                                           nik: int.tryParse(_nikCtr.text
                                                   .replaceAll(
                                                       RegExp(r'[^0-9]'), '')) ??

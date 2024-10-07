@@ -1,6 +1,9 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
+
 import 'package:payuung_clone/core/util/image_util.dart';
 
 import '../../../../../core/config/di/injector.dart';
@@ -13,17 +16,19 @@ class PersonalAddressView extends HookWidget {
     required this.profile,
     required this.nikCtr,
     required this.ktpAddressCtr,
+    required this.ktpFullPath,
+    required this.ktpBaseName,
   });
 
   final Profile profile;
   final TextEditingController nikCtr;
   final TextEditingController ktpAddressCtr;
+  final ValueNotifier<String> ktpFullPath;
+  final ValueNotifier<String> ktpBaseName;
 
   @override
   Widget build(BuildContext context) {
     final _imageUtil = getIt<ImageUtil>();
-
-    final _ktpFile = useState('');
 
     useEffect(() {
       nikCtr.text = profile.nik.toString();
@@ -53,17 +58,33 @@ class PersonalAddressView extends HookWidget {
                                 children: <Widget>[
                                   GestureDetector(
                                     child: const Text('Galeri'),
-                                    onTap: () {
+                                    onTap: () async {
                                       Navigator.of(context).pop();
-                                      _imageUtil.pickImage(ImageSource.gallery);
+                                      final _pickImage = await _imageUtil
+                                          .pickImage(ImageSource.gallery);
+
+                                      if (_pickImage != null) {
+                                        ktpFullPath.value =
+                                            _pickImage.toString();
+                                        ktpBaseName.value =
+                                            basename(ktpFullPath.value);
+                                      }
                                     },
                                   ),
                                   const Padding(padding: EdgeInsets.all(8.0)),
                                   GestureDetector(
                                     child: const Text('Kamera'),
-                                    onTap: () {
+                                    onTap: () async {
                                       Navigator.of(context).pop();
-                                      _imageUtil.pickImage(ImageSource.camera);
+                                      final _pickImage = await _imageUtil
+                                          .pickImage(ImageSource.camera);
+
+                                      if (_pickImage != null) {
+                                        ktpFullPath.value =
+                                            _pickImage.toString();
+                                        ktpBaseName.value =
+                                            basename(ktpFullPath.value);
+                                      }
                                     },
                                   ),
                                 ],
@@ -74,19 +95,26 @@ class PersonalAddressView extends HookWidget {
                       );
                     },
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         const Icon(Icons.description, color: Colors.amber),
                         const SizedBox(width: 8),
                         Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text(
                               'Upload KTP',
                               style: TextStyle(fontSize: 16),
                             ),
-                            if (_ktpFile.value.isNotEmpty)
-                              Text(
-                                _ktpFile.value,
-                                style: const TextStyle(color: Colors.grey),
+                            if (ktpBaseName.value.isNotEmpty)
+                              Container(
+                                constraints:
+                                    const BoxConstraints(maxWidth: 250),
+                                child: Text(
+                                  ktpBaseName.value,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(color: Colors.grey),
+                                ),
                               ),
                           ],
                         ),
@@ -94,7 +122,7 @@ class PersonalAddressView extends HookWidget {
                       ],
                     ),
                   ),
-                  if (_ktpFile.value.isNotEmpty)
+                  if (ktpBaseName.value.isNotEmpty)
                     const Icon(Icons.check_circle, color: Colors.green),
                 ],
               ),
