@@ -12,6 +12,7 @@ class PersonalDataView extends HookWidget {
   Widget build(BuildContext context) {
     final _nameCtr = useTextEditingController();
     final _birthDayCtr = useTextEditingController();
+
     return Column(
       children: [
         FormComponent(

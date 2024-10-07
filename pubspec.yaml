@@ -25,6 +25,12 @@ dependencies:
   injectable: ^2.4.4                             # Dependency injection for Flutter and Dart.
   intl: ^0.19.0                                  # Internationalization and localization for Flutter.
   easy_stepper: ^0.8.5+1
+  sqflite: ^2.3.3+2
+  path_provider: ^2.1.4
+  path: ^1.9.0
+  dartz: ^0.10.1
+  equatable: ^2.0.5
+  image_picker: ^1.1.2
 
 dev_dependencies:
   flutter_test:
