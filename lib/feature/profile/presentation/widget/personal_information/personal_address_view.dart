@@ -23,6 +23,8 @@ class PersonalAddressView extends HookWidget {
   Widget build(BuildContext context) {
     final _imageUtil = getIt<ImageUtil>();
 
+    final _ktpFile = useState('');
+
     useEffect(() {
       nikCtr.text = profile.nik.toString();
       ktpAddressCtr.text = profile.ktpAddress;
@@ -71,27 +73,29 @@ class PersonalAddressView extends HookWidget {
                         },
                       );
                     },
-                    child: const Row(
+                    child: Row(
                       children: [
-                        Icon(Icons.description, color: Colors.amber),
-                        SizedBox(width: 8),
+                        const Icon(Icons.description, color: Colors.amber),
+                        const SizedBox(width: 8),
                         Column(
                           children: [
-                            Text(
+                            const Text(
                               'Upload KTP',
                               style: TextStyle(fontSize: 16),
                             ),
-                            Text(
-                              'ktp-1507.jpeg',
-                              style: TextStyle(color: Colors.grey),
-                            ),
+                            if (_ktpFile.value.isNotEmpty)
+                              Text(
+                                _ktpFile.value,
+                                style: const TextStyle(color: Colors.grey),
+                              ),
                           ],
                         ),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                       ],
                     ),
                   ),
-                  const Icon(Icons.check_circle, color: Colors.green),
+                  if (_ktpFile.value.isNotEmpty)
+                    const Icon(Icons.check_circle, color: Colors.green),
                 ],
               ),
               const SizedBox(height: 16),
